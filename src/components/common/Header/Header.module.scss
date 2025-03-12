@@ -1,0 +1,42 @@
+.wrapper {
+    padding: 0 160px;
+}
+
+.inner {
+    display: flex;
+    align-items: center;
+    height: 80px;
+    position: relative;
+}
+
+.logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 80px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.nav {
+    flex: 1;
+}
+
+.links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 58px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.link {
+    display: block;
+    padding: 2px;
+    border-bottom: 1px solid transparent;
+
+    &.active {
+        border-bottom-color: $primary-color;
+    }
+}

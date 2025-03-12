@@ -1,0 +1,36 @@
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid $gray-dark;
+    border-radius: 8px;
+    color: $text-color-3;
+}
+
+// theme
+.primary {
+    border-color: $primary-color;
+    background-color: $primary-color;
+    color: $white;
+}
+
+.secondary {
+    border-color: $gray-light;
+    background-color: $gray-light;
+    color: $text-color-2;
+}
+
+// size
+.s {
+    height: 36px;
+    padding: 0 10px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.m {
+    height: 48px;
+    padding: 0 10px;
+    font-size: 16px;
+    font-weight: 500;
+}

@@ -5,9 +5,9 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     theme?: "primary" | "secondary" | "default";
     size?: "s" | "m";
 }
-const Button = ({ theme = "default", size = "m", children, ...rest }: Props) => {
+const Button = ({ className, theme = "default", size = "m", children, ...rest }: Props) => {
     return (
-        <button className={cx(styles.button, styles[theme], styles[size])} {...rest}>
+        <button className={cx(className, styles.button, styles[theme], styles[size])} {...rest}>
             {children}
         </button>
     );

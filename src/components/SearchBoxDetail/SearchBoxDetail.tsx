@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { BookSearchType } from "@/models/book";
 import { convertBookSearchType } from "@/utils/book";
@@ -11,11 +11,13 @@ import styles from "./SearchBoxDetail.module.scss";
 const SEARCH_TYPE_LIST: BookSearchType[] = ["title", "person", "publisher"];
 const SearchBoxDetail = () => {
     const navigate = useNavigate();
+    const inputRef = useRef<HTMLInputElement>(null);
     const [detailStatus, setDetailStatus] = useState<boolean>(false);
-    const [keyword, setKeyword] = useState<string>("");
     const [searchType, setSearchType] = useState<BookSearchType>(SEARCH_TYPE_LIST[0]);
 
     const onSearch = () => {
+        const keyword = inputRef.current?.value;
+        if (!keyword) return;
         navigate(`/?keyword=${keyword}&target=${searchType}`, { replace: true });
         setDetailStatus(false);
     };
@@ -45,12 +47,7 @@ const SearchBoxDetail = () => {
                                 </Dropdown.Item>
                             ))}
                         </Dropdown>
-                        <Input
-                            type="text"
-                            placeholder="검색어 입력"
-                            value={keyword}
-                            onChange={(e) => setKeyword(e.target.value)}
-                        />
+                        <Input ref={inputRef} type="text" placeholder="검색어 입력" />
                     </div>
                     <Button
                         className={styles.searchIcon}

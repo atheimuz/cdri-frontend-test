@@ -7,6 +7,7 @@ const ArrowDownIcon = ({ ...rest }: React.HTMLAttributes<HTMLSpanElement>) => {
                 viewBox="0 0 14 8"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
+                style={{ display: "block" }}
             >
                 <path
                     d="M2 -5.24537e-07L7 5L12 -8.74228e-08L14 1L7 8L-4.37114e-08 0.999999L2 -5.24537e-07Z"

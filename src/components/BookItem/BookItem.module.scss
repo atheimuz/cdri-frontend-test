@@ -1,0 +1,147 @@
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 16px 16px 48px;
+
+    .detail & {
+        align-items: stretch;
+        padding: 16px 16px 16px 54px;
+    }
+}
+
+.thumbnail {
+    display: block;
+    width: 48px;
+    height: 68px;
+    object-fit: contain;
+
+    .detail & {
+        width: 210px;
+        height: 280px;
+    }
+}
+
+.titleArea {
+    display: flex;
+    overflow: hidden;
+    gap: 16px;
+    line-height: 18px;
+}
+
+.mainInfoArea {
+    flex: 1;
+    overflow: hidden;
+
+    .summary & {
+        display: flex;
+        justify-content: space-between;
+        margin-left: 48px;
+        margin-right: 56px;
+    }
+
+    .detail & {
+        margin-left: 32px;
+    }
+}
+
+.lastInfoArea {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-left: 48px;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 700;
+
+    .summary & {
+        @include ellipsis;
+    }
+}
+
+.authors {
+    font-size: 14px;
+    font-weight: 500;
+    color: $text-color-2;
+
+    .summary & {
+        @include ellipsis;
+    }
+}
+
+.contentsTitle {
+    margin: 16px 0 12px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.contents {
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 16px;
+    white-space: pre-wrap;
+}
+
+.priceItems {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 8px;
+    flex: 1;
+}
+
+.priceItem {
+    display: flex;
+    align-items: center;
+
+    p {
+        margin-right: 8px;
+        font-size: 10px;
+        color: $text-color-3;
+    }
+
+    span {
+        font-size: 18px;
+    }
+}
+
+.price {
+    font-weight: 700;
+    white-space: nowrap;
+
+    .summary & {
+        margin-left: 8px;
+    }
+}
+
+.salePrice {
+    text-decoration: line-through;
+}
+
+.buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.buyBtn {
+    width: 115px;
+
+    .detail & {
+        width: 240px;
+        margin-top: 28px;
+    }
+}
+
+.modeBtn {
+    width: 115px;
+}
+
+.arrowIcon {
+    display: block;
+    width: 14px;
+    margin-left: 4px;
+    margin-bottom: 2px;
+}

@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { BookSearchType } from "@/models/book";
 import { convertBookSearchType } from "@/utils/book";
@@ -11,6 +11,7 @@ import styles from "./SearchBoxDetail.module.scss";
 const SEARCH_TYPE_LIST: BookSearchType[] = ["title", "person", "publisher"];
 const SearchBoxDetail = () => {
     const navigate = useNavigate();
+    const modalRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
     const [detailStatus, setDetailStatus] = useState<boolean>(false);
     const [searchType, setSearchType] = useState<BookSearchType>(SEARCH_TYPE_LIST[0]);
@@ -22,8 +23,24 @@ const SearchBoxDetail = () => {
         setDetailStatus(false);
     };
 
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+                setDetailStatus(false);
+            }
+        };
+
+        if (detailStatus) {
+            document.addEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [detailStatus]);
+
     return (
-        <div className={styles.wrapper}>
+        <div className={styles.wrapper} ref={modalRef}>
             <Button className={styles.searchBtn} size="s" onClick={() => setDetailStatus(true)}>
                 상세검색
             </Button>

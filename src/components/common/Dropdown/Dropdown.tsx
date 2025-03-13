@@ -21,9 +21,21 @@ const Dropdown = ({ className, value, children }: Props) => {
     );
 };
 
-const DropdownItem = ({ children, ...rest }: React.ButtonHTMLAttributes<HTMLButtonElement>) => {
+const DropdownItem = ({
+    onClick,
+    children,
+    ...rest
+}: React.ButtonHTMLAttributes<HTMLButtonElement>) => {
     return (
-        <button type="button" className={styles.item} {...rest}>
+        <button
+            type="button"
+            className={styles.item}
+            onClick={(e) => {
+                if (onClick) onClick(e);
+                e.currentTarget.blur();
+            }}
+            {...rest}
+        >
             {children}
         </button>
     );

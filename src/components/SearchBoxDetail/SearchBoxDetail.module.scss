@@ -1,0 +1,43 @@
+.wrapper {
+    position: relative;
+}
+
+.modal {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-top: 14px;
+    padding: 35px 20px 20px;
+    border-radius: 8px;
+    background-color: $white;
+    transform: translateX(-50%);
+    box-shadow: 0px 4px 14px 6px rgba(#979797, 0.26);
+}
+
+.searchArea {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 16px;
+}
+
+.searchIcon {
+    width: 100%;
+    margin-top: 8px;
+}
+
+.closeBtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 8px;
+    color: #b1b8c0;
+
+    svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+.dropdown {
+    width: 100px;
+}

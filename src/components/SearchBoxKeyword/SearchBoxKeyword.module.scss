@@ -1,0 +1,21 @@
+.wrapper {
+    width: 100%;
+    color: $text-color-3;
+}
+
+.keyword {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+    padding-left: 40px;
+    font-size: 16px;
+}
+
+.link {
+    flex: 1;
+}
+
+.removeBtn {
+    margin-left: 8px;
+    padding: 4px;
+}

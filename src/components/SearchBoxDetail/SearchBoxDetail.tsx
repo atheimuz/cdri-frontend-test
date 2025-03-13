@@ -31,6 +31,7 @@ const SearchBoxDetail = () => {
         };
 
         if (detailStatus) {
+            inputRef.current?.focus();
             document.addEventListener("mousedown", handleClickOutside);
         }
 

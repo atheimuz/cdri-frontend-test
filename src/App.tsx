@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "@/components/common/Header";
+import SearchBookPage from "@/pages/SearchBookPage";
 import LikedBookPage from "@/pages/LikedBookPage";
 
 function App() {
@@ -8,7 +9,7 @@ function App() {
             <Header />
             <main>
                 <Routes>
-                    <Route path="/" element={<div />} />
+                    <Route path="/" element={<SearchBookPage />} />
                     <Route path="/like" element={<LikedBookPage />} />
                 </Routes>
             </main>

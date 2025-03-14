@@ -2,18 +2,19 @@ import { useState } from "react";
 import { IBook } from "@/models/book";
 import Button from "@/components/common/Button";
 import { numberWithCommas } from "@/utils/common";
-import styles from "./BookItem.module.scss";
-
 import ArrowUpIcon from "@/components/icons/arrow-up";
 import ArrowDownIcon from "@/components/icons/arrow-down";
+import BookThumbnail from "@/components/BookThumbnail";
+import styles from "./BookItem.module.scss";
 
 type Mode = "detail" | "summary";
 interface ChildProps extends IBook {
+    thumbnailEl: React.ReactNode;
     setMode: (mode: Mode) => void;
 }
 const SummaryBook = ({
     title,
-    thumbnail,
+    thumbnailEl,
     price,
     sale_price,
     authors,
@@ -22,7 +23,7 @@ const SummaryBook = ({
 }: ChildProps) => {
     return (
         <div className={styles.wrapper}>
-            <img className={styles.thumbnail} src={thumbnail} alt={title} />
+            {thumbnailEl}
             <div className={styles.mainInfoArea}>
                 <div className={styles.titleArea}>
                     <h4 className={styles.title}>{title}</h4>
@@ -49,7 +50,7 @@ const SummaryBook = ({
 
 const DetailBook = ({
     title,
-    thumbnail,
+    thumbnailEl,
     authors,
     contents,
     url,
@@ -59,7 +60,7 @@ const DetailBook = ({
 }: ChildProps) => {
     return (
         <div className={styles.wrapper}>
-            <img className={styles.thumbnail} src={thumbnail} alt={title} />
+            {thumbnailEl}
             <div className={styles.mainInfoArea}>
                 <div className={styles.titleArea}>
                     <h4 className={styles.title}>{title}</h4>
@@ -100,8 +101,20 @@ const BookItem = (props: IBook) => {
 
     return (
         <div className={styles[mode]}>
-            {mode === "summary" && <SummaryBook {...props} setMode={setMode} />}
-            {mode === "detail" && <DetailBook {...props} setMode={setMode} />}
+            {mode === "summary" && (
+                <SummaryBook
+                    {...props}
+                    setMode={setMode}
+                    thumbnailEl={<BookThumbnail size="s" bookInfo={props} />}
+                />
+            )}
+            {mode === "detail" && (
+                <DetailBook
+                    {...props}
+                    setMode={setMode}
+                    thumbnailEl={<BookThumbnail size="m" bookInfo={props} />}
+                />
+            )}
         </div>
     );
 };

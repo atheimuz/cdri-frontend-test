@@ -1,0 +1,46 @@
+.wrapper {
+    position: relative;
+}
+
+.thumbnail {
+    display: block;
+    object-fit: contain;
+
+    .s & {
+        width: 48px;
+        height: 68px;
+    }
+
+    .m & {
+        width: 210px;
+        height: 280px;
+    }
+}
+
+.likeBtn {
+    position: absolute;
+
+    .s & {
+        padding: 2px;
+        top: 0;
+        right: 0;
+    }
+
+    .m & {
+        padding: 4px;
+        top: 6px;
+        right: 6px;
+    }
+
+    svg {
+        .s & {
+            width: 14px;
+            height: 14px;
+        }
+
+        .m & {
+            width: 20px;
+            height: 20px;
+        }
+    }
+}

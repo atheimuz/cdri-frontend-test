@@ -1,4 +1,41 @@
 .wrapper {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 500px;
+    padding: 10px 24px 10px 10px;
+    border-radius: 100px;
+    background-color: #ebebeb;
+
+    &:focus-within {
+        border-radius: 24px;
+    }
+
+    &:not(:focus-within) {
+        .keywords {
+            display: none;
+        }
+    }
+}
+
+.input {
+    flex: 1;
+    height: 30px;
+    padding: 0 10px;
+    border: none;
+    font-size: 16px;
+    background-color: transparent;
+
+    &::placeholder {
+        color: $text-color-3;
+    }
+}
+
+.searchIcon {
+    padding: 5px;
+}
+
+.keywordList {
     width: 100%;
     color: $text-color-3;
 }

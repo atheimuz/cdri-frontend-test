@@ -1,4 +1,5 @@
 import PageTitle from "@/components/common/PageTitle";
+import SearchBookList from "@/components/SearchBookList";
 import SearchBox from "@/components/SearchBox";
 import styles from "./SearchBookPage.module.scss";
 
@@ -9,6 +10,7 @@ const SearchBookPage = () => {
             <div className={styles.searchArea}>
                 <SearchBox />
             </div>
+            <SearchBookList />
         </div>
     );
 };

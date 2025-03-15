@@ -12,7 +12,7 @@ const SEARCH_TYPE_LIST: BookSearchType[] = ["title", "person", "publisher"];
 const SearchBoxDetail = () => {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
-    const keyword = searchParams.get("keyword") || "";
+    const keyword = searchParams.get("detailKeyword") || "";
     const target = searchParams.get("target") || "";
     const modalRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
@@ -26,7 +26,7 @@ const SearchBoxDetail = () => {
     const onSearch = () => {
         const keyword = inputRef.current?.value;
         if (!keyword) return;
-        navigate(`/?keyword=${keyword}&target=${searchType}`, { replace: true });
+        navigate(`/?detailKeyword=${keyword}&target=${searchType}`, { replace: true });
         setDetailStatus(false);
     };
 

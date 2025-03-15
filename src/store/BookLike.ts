@@ -9,7 +9,7 @@ const getLikedBooks = () => {
 
     const likedList: IBook[] = JSON.parse(stored);
     likedList.forEach((book) => {
-        likedBooks.set(book.title, book);
+        likedBooks.set(book.url, book);
     });
 };
 
@@ -17,34 +17,34 @@ getLikedBooks();
 
 const listeners = new Map<string, Set<() => void>>();
 export const BookLikeStore = {
-    getSnapshot: (title: string) => likedBooks.has(title),
+    getSnapshot: (url: string) => likedBooks.has(url),
 
-    subscribe: (title: string, callback: () => void) => {
-        if (!listeners.has(title)) {
-            listeners.set(title, new Set());
+    subscribe: (url: string, callback: () => void) => {
+        if (!listeners.has(url)) {
+            listeners.set(url, new Set());
         }
-        listeners.get(title)!.add(callback);
+        listeners.get(url)!.add(callback);
 
         return () => {
-            listeners.get(title)!.delete(callback);
-            if (listeners.get(title)!.size === 0) {
-                listeners.delete(title);
+            listeners.get(url)!.delete(callback);
+            if (listeners.get(url)!.size === 0) {
+                listeners.delete(url);
             }
         };
     },
 
     toggleLike: (book: IBook) => {
-        if (likedBooks.has(book.title)) {
-            likedBooks.delete(book.title);
+        if (likedBooks.has(book.url)) {
+            likedBooks.delete(book.url);
         } else {
-            likedBooks.set(book.title, book);
+            likedBooks.set(book.url, book);
         }
 
         const newLikedList = Array.from(likedBooks.values());
         localStorage.setItem(STORAGE_NAME, JSON.stringify(newLikedList));
 
-        if (listeners.has(book.title)) {
-            listeners.get(book.title)!.forEach((callback) => callback());
+        if (listeners.has(book.url)) {
+            listeners.get(book.url)!.forEach((callback) => callback());
         }
     }
 };

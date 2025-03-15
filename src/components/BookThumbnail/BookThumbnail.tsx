@@ -11,8 +11,8 @@ interface Props {
 }
 const BookThumbnail = ({ size, bookInfo }: Props) => {
     const isLiked = useSyncExternalStore(
-        (callback) => BookLikeStore.subscribe(bookInfo?.title, callback),
-        () => BookLikeStore.getSnapshot(bookInfo?.title)
+        (callback) => BookLikeStore.subscribe(bookInfo?.url, callback),
+        () => BookLikeStore.getSnapshot(bookInfo?.url)
     );
 
     if (!bookInfo) return null;

@@ -1,9 +1,20 @@
 .wrapper {
+    position: relative;
+    width: 500px;
+    height: 50px;
+}
+
+.inner {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    width: 500px;
-    padding: 10px 24px 10px 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    overflow: hidden;
+    width: 100%;
+    padding: 10px 0;
     border-radius: 100px;
     background-color: #ebebeb;
 
@@ -12,7 +23,7 @@
     }
 
     &:not(:focus-within) {
-        .keywords {
+        .keywordList {
             display: none;
         }
     }
@@ -21,7 +32,7 @@
 .input {
     flex: 1;
     height: 30px;
-    padding: 0 10px;
+    padding: 0 24px 0 10px;
     border: none;
     font-size: 16px;
     background-color: transparent;
@@ -32,6 +43,7 @@
 }
 
 .searchIcon {
+    margin-left: 10px;
     padding: 5px;
 }
 
@@ -43,9 +55,15 @@
 .keyword {
     display: flex;
     justify-content: space-between;
-    margin-top: 12px;
-    padding-left: 40px;
+    margin-top: 6px;
+    padding: 6px 50px 6px 24px;
+    padding-left: 50px;
+    padding-right: 24px;
     font-size: 16px;
+
+    &:hover {
+        background-color: $gray-light;
+    }
 }
 
 .link {
@@ -55,4 +73,8 @@
 .removeBtn {
     margin-left: 8px;
     padding: 4px;
+
+    &:hover {
+        color: $text-color;
+    }
 }

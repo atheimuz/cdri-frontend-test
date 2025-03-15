@@ -1,4 +1,5 @@
 import { useState } from "react";
+import cx from "classnames";
 import { IBook } from "@/models/book";
 import Button from "@/components/common/Button";
 import { numberWithCommas } from "@/utils/common";
@@ -10,17 +11,10 @@ import styles from "./BookItem.module.scss";
 type Mode = "detail" | "summary";
 interface ChildProps extends IBook {
     thumbnailEl: React.ReactNode;
+    final_price: number;
     setMode: (mode: Mode) => void;
 }
-const SummaryBook = ({
-    title,
-    thumbnailEl,
-    price,
-    sale_price,
-    authors,
-    url,
-    setMode
-}: ChildProps) => {
+const SummaryBook = ({ title, thumbnailEl, final_price, authors, url, setMode }: ChildProps) => {
     return (
         <div className={styles.wrapper}>
             {thumbnailEl}
@@ -29,7 +23,7 @@ const SummaryBook = ({
                     <h4 className={styles.title}>{title}</h4>
                     <span className={styles.authors}>{authors.join(", ")}</span>
                 </div>
-                <span className={styles.price}>{numberWithCommas(sale_price || price)}원</span>
+                <span className={styles.price}>{numberWithCommas(final_price)}원</span>
             </div>
             <div className={styles.buttons}>
                 <Button theme="primary" as="a" href={url} target="_blank" className={styles.buyBtn}>
@@ -56,6 +50,7 @@ const DetailBook = ({
     url,
     price,
     sale_price,
+    final_price,
     setMode
 }: ChildProps) => {
     return (
@@ -81,12 +76,21 @@ const DetailBook = ({
                 <ul className={styles.priceItems}>
                     <li className={styles.priceItem}>
                         <p>원가</p>
-                        <span className={styles.salePrice}>{numberWithCommas(price)}원</span>
+                        <span
+                            className={cx({
+                                [styles.salePrice]: price !== final_price,
+                                [styles.price]: price === final_price
+                            })}
+                        >
+                            {numberWithCommas(price)}원
+                        </span>
                     </li>
-                    <li className={styles.priceItem}>
-                        <p>할인가</p>
-                        <span className={styles.price}>{numberWithCommas(sale_price)}원</span>
-                    </li>
+                    {sale_price > 0 && (
+                        <li className={styles.priceItem}>
+                            <p>할인가</p>
+                            <span className={styles.price}>{numberWithCommas(final_price)}원</span>
+                        </li>
+                    )}
                 </ul>
                 <Button theme="primary" as="a" href={url} target="_blank" className={styles.buyBtn}>
                     구매하기
@@ -98,12 +102,14 @@ const DetailBook = ({
 
 const BookItem = (props: IBook) => {
     const [mode, setMode] = useState<Mode>("summary");
+    const final_price = props.sale_price > 0 ? props.sale_price : props.price;
 
     return (
         <div className={styles[mode]}>
             {mode === "summary" && (
                 <SummaryBook
                     {...props}
+                    final_price={final_price}
                     setMode={setMode}
                     thumbnailEl={<BookThumbnail size="s" bookInfo={props} />}
                 />
@@ -111,6 +117,7 @@ const BookItem = (props: IBook) => {
             {mode === "detail" && (
                 <DetailBook
                     {...props}
+                    final_price={final_price}
                     setMode={setMode}
                     thumbnailEl={<BookThumbnail size="m" bookInfo={props} />}
                 />

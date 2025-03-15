@@ -1,6 +1,7 @@
 import PageTitle from "@/components/common/PageTitle";
 import SearchBookList from "@/components/SearchBookList";
-import SearchBox from "@/components/SearchBox";
+import SearchBoxDetail from "@/components/SearchBoxDetail";
+import SearchBoxKeyword from "@/components/SearchBoxKeyword";
 import styles from "./SearchBookPage.module.scss";
 
 const SearchBookPage = () => {
@@ -8,7 +9,8 @@ const SearchBookPage = () => {
         <div className={styles.wrapper}>
             <PageTitle title="도서 검색" />
             <div className={styles.searchArea}>
-                <SearchBox />
+                <SearchBoxKeyword />
+                <SearchBoxDetail />
             </div>
             <SearchBookList />
         </div>

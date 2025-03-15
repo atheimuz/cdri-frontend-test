@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { BookSearchType } from "@/models/book";
 import { convertBookSearchType } from "@/utils/book";
 import CloseIcon from "@/components/icons/close";
@@ -11,10 +11,17 @@ import styles from "./SearchBoxDetail.module.scss";
 const SEARCH_TYPE_LIST: BookSearchType[] = ["title", "person", "publisher"];
 const SearchBoxDetail = () => {
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
+    const keyword = searchParams.get("keyword") || "";
+    const target = searchParams.get("target") || "";
     const modalRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
     const [detailStatus, setDetailStatus] = useState<boolean>(false);
-    const [searchType, setSearchType] = useState<BookSearchType>(SEARCH_TYPE_LIST[0]);
+    const [searchType, setSearchType] = useState<BookSearchType>(
+        SEARCH_TYPE_LIST.includes(target as BookSearchType)
+            ? (target as BookSearchType)
+            : SEARCH_TYPE_LIST[0]
+    );
 
     const onSearch = () => {
         const keyword = inputRef.current?.value;
@@ -65,7 +72,17 @@ const SearchBoxDetail = () => {
                                 </Dropdown.Item>
                             ))}
                         </Dropdown>
-                        <Input ref={inputRef} type="text" placeholder="검색어 입력" />
+                        <Input
+                            ref={inputRef}
+                            type="text"
+                            placeholder="검색어 입력"
+                            defaultValue={keyword}
+                            onKeyDown={(e) => {
+                                if (e.key === "Enter") {
+                                    onSearch();
+                                }
+                            }}
+                        />
                     </div>
                     <Button
                         className={styles.searchIcon}

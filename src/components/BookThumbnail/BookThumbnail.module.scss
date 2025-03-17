@@ -4,7 +4,7 @@
 
 .thumbnail {
     display: block;
-    object-fit: contain;
+    object-fit: cover;
 
     .s & {
         width: 48px;

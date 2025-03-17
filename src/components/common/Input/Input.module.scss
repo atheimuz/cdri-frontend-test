@@ -5,4 +5,8 @@
     font-weight: 500;
     border: none;
     border-bottom: 1px solid $primary-color;
+
+    &::placeholder {
+        color: $text-color-3;
+    }
 }

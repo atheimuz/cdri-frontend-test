@@ -1,54 +1,46 @@
-# React + TypeScript + Vite
+### 프로젝트 개요
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React와 TypeScript를 기반으로 개발되었으며, React Query를 활용한 데이터 관리 및 useSyncExternalStore를 이용한 상태 관리를 적용하였습니다.
 
-Currently, two official plugins are available:
+### 실행 방법
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+과제는 node 버전 20.12.2 환경에서 개발되었습니다.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```sh
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+`http://localhost:5173` 에 접속해 주세요.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 폴더 구조
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+-   components: 재사용 가능한 UI 컴포넌트들이 위치하는 폴더입니다.
+-   images: 이미지를 모아두는 폴더입니다.
+-   lib
+    -   remote: 외부 API 요청을 관리하는 파일들이 위치합니다. `axios`를 사용한 API 호출 로직이나 API 엔드포인트를 정의하는 파일들이 포함됩니다.
+    -   queries: `react-query`의 query들을 관리하는 폴더입니다. 주로 데이터 조회와 관련된 API 호출을 비동기적으로 관리하는 로직을 정의합니다.
+-   models: 타입 정의 파일을 모아두는 폴더입니다.
+-   pages: 페이지 단위 컴포넌트들이 위치하는 폴더입니다.
+-   utils: 다양한 데이터 변환 및 포맷팅 관련 함수들이 포함됩니다.
+-   store: 전역 상태 관리를 위한 커스텀 스토어입니다.
+-   styles: 전역 스타일 파일들이 위치하는 폴더입니다.
+
+### 라이브러리
+
+-   `react-router-dom`: 페이지 간 이동을 위한 라우팅을 처리하기 위해 사용했습니다.
+-   `@tanstack/react-query`: API 데이터의 비동기 호출 및 상태 관리를 효율적으로 처리하기 위해 사용했습니다.
+-   `axios`: REST API 통신을 위해 사용했으며, 간결하고 직관적인 API 호출을 위해 사용했습니다.
+-   `sass`: 중첩 기능을 이용해 가독성을 높이고 스타일링을 간결하게 작성하기 위해 사용했습니다.
+-   `classnames`: 조건부 클래스명을 쉽게 관리하고 가독성을 높이기 위해 사용했습니다.
+
+### 강조하고 싶은 기능
+
+-   컴포넌트 모듈화
+
+BookList, BookItem, BookThumbnail 등 컴포넌트 단위로 명확히 역할을 분리하여 관리하고,
+components 폴더 내 재사용 가능한 UI 요소를 정리하여 확장성을 확보했습니다.
+
+-   useSyncExternalStore를 이용한 '찜' 상태 관리
+
+찜 상태 여부를 구독하며, 변경이 일어난 항목에서만 리렌더링 발생하게 하여 다른 항목에는 영향을 주지 않는 방식으로 구현하였습니다.

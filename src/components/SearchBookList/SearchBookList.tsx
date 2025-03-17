@@ -12,7 +12,7 @@ const SearchBookList = () => {
     const keyword = searchParams.get("keyword") || "";
     const detailKeyword = searchParams.get("detailKeyword") || "";
     const target = searchParams.get("target") || undefined;
-    const { data, isFetching, fetchNextPage, hasNextPage } = useBooks({
+    const { data, isFetching, fetchNextPage, hasNextPage, isError } = useBooks({
         keyword: target && detailKeyword ? detailKeyword : keyword,
         target,
         size: 10
@@ -20,6 +20,14 @@ const SearchBookList = () => {
 
     const pages = data?.pages ?? [];
 
+    if (isError) {
+        return (
+            <div className={styles.wrapper}>
+                <SearchResultCount title="도서 검색 결과" count={pages[0]?.meta.total_count || 0} />
+                <p>데이터를 가져오지 못했습니다.</p>
+            </div>
+        );
+    }
     return (
         <div className={styles.wrapper}>
             <SearchResultCount title="도서 검색 결과" count={pages[0]?.meta.total_count || 0} />

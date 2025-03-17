@@ -23,7 +23,7 @@ const SearchBookList = () => {
     return (
         <div className={styles.wrapper}>
             <SearchResultCount title="도서 검색 결과" count={pages[0]?.meta.total_count || 0} />
-            {pages[0]?.documents ? (
+            {pages[0] && pages[0].documents?.length > 0 ? (
                 <ul>
                     {pages.map((page) =>
                         page?.documents?.map((item) => (

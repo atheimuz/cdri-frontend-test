@@ -53,6 +53,10 @@ const SearchBoxKeyword = () => {
         if (activeElement instanceof HTMLElement) {
             activeElement.blur();
         }
+
+        if (inputRef.current) {
+            inputRef.current.value = keyword;
+        }
     }, [keyword]);
 
     return (
